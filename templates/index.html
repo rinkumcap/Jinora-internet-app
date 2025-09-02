@@ -1,0 +1,432 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>App Downloader</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+
+  <style>
+    body {
+      background-color: #f7f7f7;
+      font-family: 'Poppins', sans-serif;
+    }
+    /*====================== 
+          Navbar
+    ====================== */
+    
+
+    .nav-link {
+      color: grey;
+      font-weight: 600;
+      position: relative;
+    }
+    .nav-link.active {
+      color: #0aa7e6 !important;
+    }
+    .nav-link::after {
+      content: "";
+      width: 0%;
+      height: 2px;
+      background: #0aa7e6;
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      transition: 0.3s;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+     .navbar-brand img{
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+    }
+   /*====================== 
+          Logo 
+    ====================== */
+    
+    .logo_image img {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+     
+    }
+   .logi_name{
+      /* color: rgb(84, 83, 83); */
+      color: rgb(5, 5, 94);
+      font-weight: 700;
+      font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+   }
+    .title_text h2 {
+      font-size: 20px;
+      font-weight: bold;
+      color: #0aa7e6;
+      animation: fadeIn 2s ease-in;
+    }
+    .p_text{
+      color:red;
+      margin-top: 10px;
+    }
+    
+ /*====================== 
+        Devices Section
+   ====================== */
+    
+  .main-img {
+    width: 100%;
+    max-width: 200px;
+    height: 350px;
+    border-radius: 15px;
+    box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.25);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .main-img:hover {
+    box-shadow: 0px 12px 30px rgba(0, 0, 0, 0.35);
+  }
+
+    .mini-img {
+    width: 25px;
+    height: auto;
+    }
+
+   
+   .mini-box{
+    margin-top: 20px;
+   }
+    .mini-box a {
+      text-decoration: none;
+      color: #0aa7e6;
+      transition: 0.3s;
+   
+    }
+    .mini-box a:hover {
+      color: tomato;
+      text-decoration: underline;
+    }
+   .custom-download-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background-color: #32CD30;  /* custom color */
+      color: #fff !important;
+      border-radius: 30px;
+      padding: 10px 10px;
+      box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease-in-out;
+      text-decoration: none;
+    }
+    a.custom-download-btn {
+      text-decoration: none;
+
+    }
+    a.custom-download-btn:hover {
+      background-color: #5CD85A;
+      box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.3);
+      text-decoration: none;
+    }
+    .messagees {
+      font-size: 15px;
+    }
+
+  /*====================== 
+      Footer Section
+   ====================== */
+    footer {
+      background-color: #111;
+      color: #bbb;
+      padding: 40px 0;
+    }
+    footer h5 {
+      color: #fff;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    footer ul li a {
+      color: #bbb;
+      transition: 0.3s;
+      text-decoration: none;
+    }
+    footer ul li a:hover {
+      color: #0aa7e6;
+      text-shadow: 0px 0px 5px #0aa7e6;
+    }
+    .footer-bottom {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 14px;
+      color: #777;
+    }
+
+
+ /*====================== 
+    Main Images
+   ====================== */
+
+   
+    /* .center-box {
+      display: flex;
+      align-items: center;      
+      justify-content: center;  
+      gap: 8px;   
+      border: 2px solid red;  
+                
+    } */
+    .main-img-wrapper {
+    position: relative;
+    display: inline-block;
+
+  }
+
+  .main-img {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  }
+
+
+  .bg-img {
+    position: absolute;
+    bottom: -15px;
+    width: 90%;     
+    z-index: 1;
+    opacity: 0.5;
+    border-radius: 15px;
+    transition: all 0.3s;
+  }
+
+
+  .left-bg {
+    left: -55px;     
+    transform: rotate(-5deg);
+  }
+
+
+  .right-bg {
+    right: -55px;        
+    transform: rotate(5deg);
+  }
+
+
+  .main-img-wrapper:hover .main-img {
+    transform: scale(1.05);
+  }
+
+
+ /*====================== 
+    Download badge count
+   ====================== */
+  .download-badge{
+  margin-left: 8px;
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  min-width: 36px;
+  height: 36px;
+  line-height: 36px;
+  border-radius: 999px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 0 8px;
+  box-shadow: inset 0 -2px 0 rgba(0,0,0,0.08);
+}
+
+/* small screen adjustments */
+@media (max-width:480px){
+  .btn-text{ display:none; } /* keep icon + badge only */
+  .download-badge{ min-width:28px; height:28px; line-height:28px; font-size:13px; }
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg bg-light shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-primary text-dark" href="{% url 'home' %}">
+        <img src="static/image/JINORA_logo.png" alt="Jinora"> <span class="logi_name">Jinora Internet</span></a>
+      <ul class="nav ms-auto">
+        <li class="nav-item"><a class="nav-link active" href="{% url 'home' %}">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">FAQ</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Apps</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Moderation</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+      <!-- Devices Section -->
+       <!-- Hero Section -->
+      <section class="py-5 text-center">
+        <div class="container">
+          <div class="row justify-content-center g-4">
+            {% for app in apps %}
+             <div class="col-md-4 ">
+                <div class="logo_image mb-3" data-aos="zoom-in">
+                  <img src="{{ app.logo_image.url }}" alt="{{ app.name }}">
+                </div>
+                <div class="title_text mb-3">                                                                                                                                                                           
+                  <h2>{{ app.name }}</h2>
+                  <h5 class="messagees text-muted">{{ app.tagline }}</h5>                                                                                                                               
+                </div>
+
+                  
+                <div class="main-img-wrapper mb-3">
+                  <!-- Left background image -->
+                  {% if app.main_image2 %}
+                  <img class="bg-img left-bg" src="{{ app.main_image2.url }}" alt="{{ app.name }}">
+                  {% endif %}
+                  <!-- Right background image -->
+                  {% if app.main_image1 %}
+                  <img class="bg-img right-bg" src="{{ app.main_image1.url }}" alt="{{ app.name }}">
+                  {% endif %}
+                  <!-- Main image -->
+                  {% if app.main_image %}
+                  <img class="main-img" src="{{ app.main_image.url }}" alt="{{ app.name }}">
+                  {% endif %}
+                </div>
+
+
+                <div class="mini-box">
+                  {% if app.download_file %}
+                      <a href="{% url 'download_app_file' app.id %}" 
+                        class="btn custom-download-btn download-btn" 
+                        data-app-id="{{ app.id }}">
+                        <span class="download-badge" id="download-badge-{{ app.id }}">{{ app.download_count }}</span>
+                        <i class="fa-solid fa-download"></i>
+                        Download {{ app.name }} 
+                        
+                      
+                      
+                        {% if app.platform == "android" %}
+                          <img class="mini-img" src="{% static 'image/android.png' %}" alt="App Store">
+                        {% elif app.platform == "ios" %}
+                    
+                          <img class="mini-img" src="{% static 'image/apple.png' %}" alt="Playstore">
+                        {% endif %}
+                      </a>
+                                                            
+                         {% else %}
+                      
+                        <a  target="_blank" class="btn custom-download-btn">
+                          Coming soon 
+                        </a>
+                        {% endif %}
+                          </a>
+                        <br>
+                       
+                          {% if app.platform == "android" %}
+                            <img class="mini-img" src="{% static 'image/playstore.png' %}" alt="ios">
+                              <a href="{{ app.download_link }}" class="p_text mb-0">Playstore</a>
+                          {% elif app.platform == "ios" %}
+                            <img class="mini-img" src="{% static 'image/apple.png' %}" alt="App Store">
+                            <a href="{{ app.download_link }}" class="p_text mb-0">App Store </a>
+                        
+                     
+                        {% endif %}
+                      </a>
+             
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-md-4 text-center text-md-start">
+          <p>
+            Telegram is a cloud-based mobile and desktop messaging app with a focus on security and speed.
+          </p>
+        </div>
+        <div class="col-md-2 col-6">
+          <h5>About</h5>
+          <ul class="list-unstyled">
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Press</a></li>
+          </ul>
+        </div>
+        <div class="col-md-2 col-6">
+          <h5>Mobile Apps</h5>
+          <ul class="list-unstyled">
+            <li><a href="#">iPhone / iPad</a></li>
+            <li><a href="#">Android</a></li>
+          </ul>
+        </div>
+        <div class="col-md-2 col-6">
+          <h5>Desktop Apps</h5>
+          <ul class="list-unstyled">
+            <li><a href="#">PC / Mac / Linux</a></li>
+            <li><a href="#">Web-browser</a></li>
+          </ul>
+        </div>
+        <div class="col-md-2 col-6">
+          <h5>Platform</h5>
+          <ul class="list-unstyled">
+            <li><a href="#">API</a></li>
+            <li><a href="#">Translations</a></li>
+            <li><a href="#">Instant View</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr class="border-secondary">
+      <div class="footer-bottom">
+        © 2025 Milkar Seva Sansthan. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- AOS JS -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1200,
+      once: true
+    });
+  </script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).on("click", ".download-btn", function(e) {
+    e.preventDefault();
+    let appId = $(this).data("app-id");
+    let downloadUrl = $(this).attr("href");
+    let badge = $("#download-badge-" + appId);
+
+    // Step 1: pehle counter update karo
+    $.ajax({
+        url: "/update-download-count/" + appId + "/",
+        type: "POST",
+        headers: { "X-CSRFToken": "{{ csrf_token }}" },  // csrf token zaroori hai
+        success: function(response) {
+            if (response.success) {
+                badge.text(response.count); // UI update
+                // Step 2: ab actual file download trigger karo
+                window.location.href = downloadUrl;
+            }
+        }
+    });
+});
+</script>
+
+
+</body>
+</html>
