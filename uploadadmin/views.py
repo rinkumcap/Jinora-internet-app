@@ -82,7 +82,7 @@ def admin_logout_view(request):
 def app_list(request):
     if 'admin_id' not in request.session:
         return redirect('admin_login')
-    app_list = App.objects.filter(is_deleted=False)
+    app_list = App.objects.all()
     return render(request, "app_list.html", {"app_list": app_list})
 
 @csrf_exempt
@@ -126,8 +126,9 @@ def app_delete(request, app_id):
         return redirect('admin_login')
 
     app = get_object_or_404(App, pk=app_id)
-    app.is_deleted = True
-    app.save()
+    app.delete()
+    # app.is_deleted = True
+    # app.save()
     messages.success(request, "App deleted successfully!")
     return redirect("app_list")
 
