@@ -1,0 +1,54 @@
+
+{% extends "base_header.html" %}
+
+{% block title %}MilkarSeva Sansthan | dashboard{% endblock %}
+
+{% block content %}
+
+ 
+  <div class="pc-container">
+    <div class="pc-content">
+
+      <div class="row">
+        <!-- [ sample-page ] start -->
+        <div class="col-md-6 col-xl-3">
+          <div class="card">
+            <div class="card-body">
+              <h6 class="mb-2 f-w-400 text-muted">Total Android App</h6>
+              <h4 class="mb-3">{{ android_count }}<span class="badge bg-light-primary border border-primary" style="margin-left: 5px;"><i
+                    class="ti ti-trending-up"></i> {{ android_count }}</span></h4>
+              <p class="mb-0 text-muted text-sm">Active Android App <span class="text-primary">{{ android_count }}</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-xl-3">
+          <div class="card">
+            <div class="card-body">
+              <h6 class="mb-2 f-w-400 text-muted">Total IOS App </h6>
+              <h4 class="mb-3">{{ ios_count }}<span class="badge bg-light-success border border-success" style="margin-left: 5px;"><i
+                    class="ti ti-trending-up"></i>{{ ios_count }}</span></h4>
+              <p class="mb-0 text-muted text-sm">Active IOS App  <span class="text-success">{{ ios_count }}</span></p>
+            </div>
+          </div>
+        </div>
+        
+      
+          
+           
+          
+        </div>  
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        
+  
+      </div>
+    </div>
+  </div>
+  <!-- [ Main Content ] end -->
+
+  {% endblock %}

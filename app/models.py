@@ -22,7 +22,8 @@ class App(models.Model):
     download_count = models.PositiveIntegerField(default=0) 
     is_active = models.BooleanField(default=True) 
     created_at = models.DateTimeField(auto_now_add=True)
-    is_deleted = models.BooleanField(default=False, blank=True, null=True)              
+    is_deleted = models.BooleanField(default=False, blank=True, null=True)   
+    updated_at = models.DateTimeField(auto_now=True)           
 
     def __str__(self):
         return self.name
